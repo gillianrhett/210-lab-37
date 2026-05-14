@@ -6,8 +6,6 @@
 using namespace std;
 
 int gen_hash_index(string);
-list<char> convert_s_to_clist(string);
-bool search_map(int, map<int, list<char>>&);
 
 //const string FILENAME = "lab-37-data-3.txt";
 const string FILENAME = "testdata.txt";
@@ -58,12 +56,12 @@ int main() {
         int temp_key = gen_hash_index(str_in);
 
         // check whether this key is already taken
-        while(search_map(temp_key, hash_table))
+        while(hash_table.count(temp_key) > 0)
             temp_key += 1; // get a key that isn't already taken, via simple linear probe
-        
-        list<char> char_list = convert_s_to_clist(str_in);
+
         // store the string's chars in the list
-        hash_table[temp_key] = {char_list};
+        for (char c : str_in)
+            hash_table[temp_key].push_back(c);
     }
 
     // display the first 100 elements in the map
@@ -76,6 +74,7 @@ int main() {
             cout << c;
         cout << endl;
     }
+
 //Your final submission is Milestone 3.
 
     return 0;
@@ -88,17 +87,4 @@ int gen_hash_index(string str_in) {
     for (char c : str_in)
         sum += c;
     return sum;
-}
-
-list<char> convert_s_to_clist(string str_in) {
-// put the chars from a string into a list
-    list<char> c_list;
-    for(char c : str_in)
-        c_list.push_back(c);
-    return c_list;
-}
-
-bool search_map(int search_key, map<int, string>& map_to_search) {
-    auto it = map_to_search.find(search_key);
-    return it != map_to_search.end();
 }
