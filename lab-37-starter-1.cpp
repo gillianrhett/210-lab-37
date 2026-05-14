@@ -6,6 +6,7 @@
 using namespace std;
 
 int gen_hash_index(string);
+list<char> convert_s_to_clist(string);
 
 const string FILENAME = "lab-37-data-3.txt";
 //const string FILENAME = "testdata.txt";
@@ -48,13 +49,19 @@ int main() {
 //    values that are std::lists
 
 //Create the std::map named hash_table. The key in the map is an int, the hash index. The value in a map is a std::list, which will contain the 12-character codes from the file that all map to that hash index.
-    map <int, list<char>> hash_table;
+    map<int, list<char>> hash_table;
     string str_in; // for getting each line from the file
 //When codes are read from the file, send the code to your function. Receive its hash index that's returned from the function. Input that pair into the map (the hash index and the code string). Remember that the code string is going into a std::list, so use the appropriate method to manipulate that std::list.
     while(inFile >> str_in) {
-        // create the hash and find its place in the map - works like an array? are indices still sequential?
+        // create the hash
+        int temp_key = gen_hash_index(str_in);
 
+        // check whether this key is already taken
+        while(hash_table.count(temp_key))
+            temp_key += 1; // get a key that isn't already taken, via simple linear probe
+        list<char> char_list = convert_s_to_clist(str_in);
         // store the string's chars in the list
+        hash_table.insert(temp_key, char_list);
     }
 
 //Display just the first 100 map entries to the console to test your data structure. Remember how to access map elements with .first and .second as necessary.
@@ -71,6 +78,14 @@ int gen_hash_index(string str_in) {
     for (char c : str_in)
         sum += c;
     return sum;
+}
+
+list<char> convert_s_to_clist(string str_in) {
+// put the chars from a string into a list
+    list<char> c_list;
+    for(char c : str_in)
+        c_list.push_back(c);
+    return c_list;
 }
 
 /* 
