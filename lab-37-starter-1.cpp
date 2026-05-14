@@ -5,8 +5,8 @@ using namespace std;
 
 int sum_ascii(string);
 
-//const string FILENAME = "lab-37-data-3.txt";
-const string FILENAME = "testdata.txt";
+const string FILENAME = "lab-37-data-3.txt";
+//const string FILENAME = "testdata.txt";
 
 int main() {
 
@@ -32,13 +32,13 @@ int main() {
     int grand_total = 0;
     // read each string from the file and add its int value to the grand total
     string str_in; // for getting each line from the file
-    while(!inFile.eof()) {
-        inFile >> str_in;
+    while(inFile >> str_in) {
         grand_total += sum_ascii(str_in);
     }
 
     cout << grand_total << endl; // it should be 69893419
-    // I got 69894129, difference is 710. is it getting line break characters?
+    // I got 69894129, difference is 710. It's getting the last line twice
+    // fixed by putting inFile >> str_in in the while condition instead of !eof
 
     return 0;
 }
