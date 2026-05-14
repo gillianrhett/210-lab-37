@@ -7,9 +7,9 @@ using namespace std;
 
 int gen_hash_index(string);
 
-const string FILENAME = "lab-37-data-3.txt";
-//const string FILENAME = "testdata.txt";
-const int MAX_SIZE = 100185; // the number of items we need to store
+//const string FILENAME = "lab-37-data-3.txt";
+const string FILENAME = "testdata.txt";
+const int MAX_SIZE = 100185; // total number of records that need to be stored
 
 int main() {
 
@@ -34,10 +34,12 @@ int main() {
         int temp_key = gen_hash_index(str_in);
 
         // check whether this key is already taken
+        int x = 0; // for quadratic probing
         while(hash_table.count(temp_key) > 0) {
-            temp_key +=1; // get a key that isn't already taken
-            if (temp_key > MAX_SIZE)
-                temp_key = 0; // wrap back around to 0
+            temp_key += 1; // linear probing
+            //temp_key = (temp_key + x + x * x); // get a key that isn't already taken
+            //++x; // since I'm not removing any records, all empty buckets are empty from start
+
             cout << temp_key << " "; // testing
         }
 
@@ -64,7 +66,7 @@ int main() {
 
 int gen_hash_index(string str_in) {
 // generates a hash index that is the sum of the characters' ascii values
-// since different strings can have the same sum, I'll use linear probing
+// since different strings can have the same sum, I'll use quadratic probing
     int sum = 0;
     for (char c : str_in)
         sum += c;
