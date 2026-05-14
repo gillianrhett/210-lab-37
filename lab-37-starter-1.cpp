@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int stringSum(string);
+int sum_ascii(string);
 
 int main() {
     //Write a function sum_ascii() that receives a single string and returns the sum of that string's character's ASCII values. 
@@ -21,14 +21,14 @@ Test your function by providing it with any string, double-checking the ASCII va
 Commit/push your code one additional time at the end of this part with the commit comment "Milestone 1."
   */
     string word = "Hello"; // 72 + 101 + 108 + 108 + 111 = 500
-    cout << stringSum(word) << endl;
+    cout << sum_ascii(word) << endl;
     word = "world!"; // 119 + 111 + 114 + 108 + 100 + 33 = 585
-    cout << stringSum(word) << endl;
+    cout << sum_ascii(word) << endl;
 
     return 0;
 }
 
-int stringSum(string str_in) {
+int sum_ascii(string str_in) {
     int sum = 0;
     for (char c : str_in)
         sum += c;
