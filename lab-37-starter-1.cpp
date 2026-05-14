@@ -69,9 +69,11 @@ int main() {
     }
 
 //Display just the first 100 map entries to the console to test your data structure. Remember how to access map elements with .first and .second as necessary.
-    int max = 100;
-    for (auto pair : hash_table)
-        cout << pair.second << endl;
+    int max = 4;
+    int i = 0;
+    for (auto it = hash_table.begin(); it != hash_table.end() && i < max; ++it, ++i) {
+        std::cout << it->second << endl;
+    }
 //Your final submission is Milestone 3.
 
     return 0;
