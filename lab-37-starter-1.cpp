@@ -36,9 +36,10 @@ int main() {
         // check whether this key is already taken
         int x = 0; // for quadratic probe
         while(hash_table.count(temp_key) > 0) {
-            temp_key = ; // get a key that isn't already taken
+            temp_key = temp_key + x + x * x; // get a key that isn't already taken
             if (temp_key > MAX_SIZE)
                 temp_key = 0; // wrap back around to 0
+            x += 1;
         }
 
         // store the string's chars in the list
