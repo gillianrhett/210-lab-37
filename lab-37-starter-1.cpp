@@ -50,6 +50,8 @@ int main() {
 
 //Create the std::map named hash_table. The key in the map is an int, the hash index. The value in a map is a std::list, which will contain the 12-character codes from the file that all map to that hash index.
     map<int, list<char>> hash_table;
+    hash_table[0] = {'a','b'}; // testing
+    cout << hash_table.count(0) << endl; // testing
     string str_in; // for getting each line from the file
 //When codes are read from the file, send the code to your function. Receive its hash index that's returned from the function. Input that pair into the map (the hash index and the code string). Remember that the code string is going into a std::list, so use the appropriate method to manipulate that std::list.
     while(inFile >> str_in) {
@@ -61,7 +63,7 @@ int main() {
             temp_key += 1; // get a key that isn't already taken, via simple linear probe
         list<char> char_list = convert_s_to_clist(str_in);
         // store the string's chars in the list
-        hash_table.insert(temp_key, char_list);
+        
     }
 
 //Display just the first 100 map entries to the console to test your data structure. Remember how to access map elements with .first and .second as necessary.
