@@ -1,29 +1,44 @@
 // COMSC-210 | Lab 37 | Gillian Rhett
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int sum_ascii(string);
 
+//const string FILENAME = "lab-37-data-3.txt";
+const string FILENAME = "testdata.txt";
+
 int main() {
-    //Write a function sum_ascii() that receives a single string and returns the sum of that string's character's ASCII values. 
 
-/*You can cast from a character to an integer easily. Look at the demo code in the starter repl. You cast a character-to-an-int and an int-to-a-character by prefacing the variable with (int) or (char) accordingly:
-
-    char a = 'A';
-    cout << a << endl;
-    cout << (int) a << endl;   << prints the ASCII value of 'A'
-    int b = 66;
-    cout << b << endl;
-    cout << (char) b << endl;  << prints the char equivalent of 66
-
-Test your function by providing it with any string, double-checking the ASCII values by hand to validate your code's calculations.
-
-Commit/push your code one additional time at the end of this part with the commit comment "Milestone 1."
-  */
+    /* Milestone 1
     string word = "Hello"; // 72 + 101 + 108 + 108 + 111 = 500
     cout << sum_ascii(word) << endl;
     word = "world!"; // 119 + 111 + 114 + 108 + 100 + 33 = 585
     cout << sum_ascii(word) << endl;
+    */
+
+    ifstream inFile; // file object to get the items from
+    // try to open the file
+    try {
+        inFile.open(FILENAME, ios::in);
+        if(inFile.fail()) 
+            throw invalid_argument("file not found");
+    }
+    catch(invalid_argument& e) {
+        cout << "Error: " << e.what();
+        return -1;
+    }
+    
+    int grand_total = 0;
+    // read each string from the file and add its int value to the grand total
+    string str_in; // for getting each line from the file
+    while(!inFile.eof()) {
+        inFile >> str_in;
+        grand_total += sum_ascii(str_in);
+    }
+
+    cout << grand_total << endl; // it should be 69893419
+    // I got 69894129, difference is 710. is it getting line break characters?
 
     return 0;
 }
