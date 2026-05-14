@@ -7,9 +7,9 @@ using namespace std;
 
 int gen_hash_index(string);
 
-//const string FILENAME = "lab-37-data-3.txt";
-const string FILENAME = "testdata.txt";
-const int MAX_SIZE = 100185; // total number of records that need to be stored
+const string FILENAME = "lab-37-data-3.txt";
+//const string FILENAME = "testdata.txt";
+//const int MAX_SIZE = 100185; // total number of records that need to be stored
 
 int main() {
 
@@ -39,8 +39,6 @@ int main() {
             temp_key += 1; // linear probing
             //temp_key = (temp_key + x + x * x); // get a key that isn't already taken
             //++x; // since I'm not removing any records, all empty buckets are empty from start
-
-            cout << temp_key << " "; // testing
         }
 
         // store the string's chars in the list
@@ -58,8 +56,6 @@ int main() {
             cout << c;
         cout << endl;
     }
-
-//Your final submission is Milestone 3.
 
     return 0;
 }
