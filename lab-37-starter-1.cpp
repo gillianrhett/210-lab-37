@@ -7,7 +7,7 @@ using namespace std;
 
 int gen_hash_index(string);
 list<char> convert_s_to_clist(string);
-bool search_map(int, map<int, string>&);
+bool search_map(int, map<int, list<char>>&);
 
 //const string FILENAME = "lab-37-data-3.txt";
 const string FILENAME = "testdata.txt";
@@ -50,9 +50,7 @@ int main() {
 //    values that are std::lists
 
 //Create the std::map named hash_table. The key in the map is an int, the hash index. The value in a map is a std::list, which will contain the 12-character codes from the file that all map to that hash index.
-    map<int, string> hash_table; // I'll get it to work with a string first, then convert to a list of chars
-    hash_table[0] = {"abc"}; // testing
-    cout << hash_table.count(0) << endl; // testing
+    map<int, list<char>> hash_table; // I'll get it to work with a string first, then convert to a list of chars
     string str_in; // for getting each line from the file
 //When codes are read from the file, send the code to your function. Receive its hash index that's returned from the function. Input that pair into the map (the hash index and the code string). Remember that the code string is going into a std::list, so use the appropriate method to manipulate that std::list.
     while(inFile >> str_in) {
@@ -63,16 +61,20 @@ int main() {
         while(search_map(temp_key, hash_table))
             temp_key += 1; // get a key that isn't already taken, via simple linear probe
         
-        //list<char> char_list = convert_s_to_clist(str_in);
+        list<char> char_list = convert_s_to_clist(str_in);
         // store the string's chars in the list
-        hash_table[temp_key] = {str_in};
+        hash_table[temp_key] = {char_list};
     }
 
-//Display just the first 100 map entries to the console to test your data structure. Remember how to access map elements with .first and .second as necessary.
-    int max = 4;
+    // display the first 100 elements in the map
+    cout << "Key\tValue" << endl;
+    int max = 100;
     int i = 0;
     for (auto it = hash_table.begin(); it != hash_table.end() && i < max; ++it, ++i) {
-        std::cout << it->second << endl;
+        std::cout << it->first << "\t";
+        for (char c : it->second)
+            cout << c;
+        cout << endl;
     }
 //Your final submission is Milestone 3.
 
@@ -100,11 +102,3 @@ bool search_map(int search_key, map<int, string>& map_to_search) {
     auto it = map_to_search.find(search_key);
     return it != map_to_search.end();
 }
-
-/* 
-These targets are present in the dataset and can be used for testing:
-536B9DFC93AF
-1DA9D64D02A0
-666D109AA22E
-E1D2665B21EA
-*/
