@@ -36,9 +36,9 @@ int main() {
         // check whether this key is already taken
         int x = 0; // for quadratic probing
         while(hash_table.count(temp_key) > 0) {
-            temp_key += 1; // linear probing
-            //temp_key = (temp_key + x + x * x); // get a key that isn't already taken
-            //++x; // since I'm not removing any records, all empty buckets are empty from start
+            //temp_key += 1; // linear probing
+            temp_key = (temp_key + x + 2 * x * x); // get a key that isn't already taken
+            ++x; // since I'm not removing any records, all empty buckets are empty from start
         }
 
         // store the string's chars in the list
@@ -66,5 +66,6 @@ int gen_hash_index(string str_in) {
     int sum = 0;
     for (char c : str_in)
         sum += c;
-    return sum;
+    return sum - 576; // the smallest possible sum is 576 for string 000000000000
+    // this means the smallest key will be 0
 }
